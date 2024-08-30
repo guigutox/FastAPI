@@ -14,7 +14,7 @@ class Message(BaseModel):
 
 @app.get("/")
 def read_root():
-    return {"Hello":"TESTE3"}
+    return {"Hello":"TESTE4"}
 
 @app.post("/criar", status_code=201)
 def criar_valores(nova_mensagem: Message):
