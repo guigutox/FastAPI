@@ -6,13 +6,8 @@ import os
 # Carregar as variáveis de ambiente do arquivo .env
 load_dotenv()
 
-# Obter as variáveis do .env
-user = os.getenv("DATABASE_USER")
-password = os.getenv("DATABASE_PASSWORD")
-database = os.getenv("DATABASE_NAME")
-host = os.getenv("DATABASE_HOST")
 
-SQLALCHEMY_DATABASE_URL = f"postgresql://{user}:{password}@{host}/{database}"
+SQLALCHEMY_DATABASE_URL = os.getenv("SQLALCHEMY_DATABASE_URL")
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
