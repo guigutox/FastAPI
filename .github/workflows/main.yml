@@ -7,14 +7,14 @@ on:
 jobs:
   job1:
     runs-on: ubuntu-latest
+    
     services:
       postgres:
         image: postgres:13
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: 0212
+          POSTGRES_PASSWORD: '0212'
           POSTGRES_DB: pds2_database
-          POSTGRES_HOST: localhost
         ports:
           - 5432:5432
 
@@ -38,5 +38,5 @@ jobs:
 
       - name: Executar pytest
         env:
-          DATABASE_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}
+          SQLALCHEMY_DATABASE_URL: postgresql://postgres:0212@localhost:5432/pds2_database
         run: pytest teste.py
