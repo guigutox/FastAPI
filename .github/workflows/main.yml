@@ -14,7 +14,6 @@ jobs:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: 0212
           POSTGRES_DB: pds2_database
-          POSTGRES_HOST: localhost
         ports:
           - 5432:5432
 
@@ -38,5 +37,5 @@ jobs:
 
       - name: Executar pytest
         env:
-          DATABASE_URL: postgres://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}
+          DATABASE_URL: postgresql://postgres:0212@localhost/pds2_database
         run: pytest teste.py
