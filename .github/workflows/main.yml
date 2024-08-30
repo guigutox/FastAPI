@@ -12,9 +12,9 @@ jobs:
       postgres:
         image: postgres:13
         env:
-          USER: postgres
-          PASSWORD: 0212
-          DB: pds2_database
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: '0212'
+          POSTGRES_DB: pds2_database
         ports:
           - 5432:5432
 
