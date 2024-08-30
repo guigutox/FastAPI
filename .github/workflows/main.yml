@@ -37,5 +37,5 @@ jobs:
 
       - name: Executar pytest
         env:
-          DATABASE_URL: postgresql://postgres:0212@localhost/pds2_database
+          SQLALCHEMY_DATABASE_URL: postgresql://postgres:0212@localhost/pds2_database
         run: pytest teste.py
