@@ -16,12 +16,13 @@ jobs:
           POSTGRES_DB: pds2_database
         ports:
           - 5432:5432
+        options: --health-cmd "pg_isready -U postgres" --health-interval 10s --health-timeout 5s --health-retries 5
 
     steps:
       - name: pulling git repo
         uses: actions/checkout@v2
 
-      - name: instalando o python
+      - name: installing python
         uses: actions/setup-python@v2
         with:
           python-version: "3.12.4"
@@ -29,13 +30,17 @@ jobs:
       - name: update pip
         run: python -m pip install --upgrade pip
 
-      - name: instalar dependencias
+      - name: install dependencies
         run: pip install -r requirements.txt
 
-      - name: Esperando o PostgreSQL ficar pronto
-        run: sleep 15
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          until pg_isready -h postgres -U postgres; do
+            echo "Waiting for PostgreSQL..."
+            sleep 2
+          done
 
-      - name: Executar pytest
+      - name: Execute pytest
         env:
-          SQLALCHEMY_DATABASE_URL: postgresql://postgres:0212@localhost:5432/pds2_database
+          SQLALCHEMY_DATABASE_URL: postgresql://postgres:0212@postgres:5432/pds2_database
         run: pytest teste.py
