@@ -18,9 +18,9 @@ origins = [
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/quadrado/{num}", status_code=200)
-def square(num: int):
-    return {"Quadrado": num ** 2}
+@app.get("/quadrado/{num}")
+def quadrado(num: int):
+    return num ** 2
 
 @app.post("/criar", status_code=201)
 def criar_valores(nova_mensagem: classes.Mensagem, db: Session = Depends(get_db)):
